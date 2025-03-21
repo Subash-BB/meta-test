@@ -8,7 +8,7 @@ export async function generateMetadata({ params }: {
     const title = resume?.name ? `${resume.name} - ${resume.title} Resume` : 'Resume';
   const description = resume?.summary || 'Professional Resume';
   const imageUrl = resume?.illustration_image || '';
-  const url = `https://yourdomain.com/resume/${id}`;
+  const url = `https://elevateresume-dev.netlify.app/resume/${id}`;
     return {
         title,
         description,
