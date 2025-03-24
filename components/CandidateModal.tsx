@@ -269,7 +269,7 @@ export default function CandidateModal({ slides, slideLoading, isOpen, onClose, 
                             onClick={() => {
                               resumeHelper.downloadSlides(slides || []);
                             }}
-                            className="flex items-center space-x-2 px-6 py-3 bg-white bg-opacity-10 hover:bg-opacity-20 rounded-full transition-all duration-200"
+                            className="flex items-center space-x-2 px-6 py-3 bg-white/10 bg-opacity-10 hover:bg-white/20 rounded-full transition-all duration-200"
                           >
                             <button.icon className="w-5 h-5 text-white" />
                             <span className="text-white">{button.label}</span>
@@ -278,7 +278,7 @@ export default function CandidateModal({ slides, slideLoading, isOpen, onClose, 
                           return <button
                             key={index}
                             onClick={button.onClick}
-                            className="flex items-center space-x-2 px-6 py-3 bg-white bg-opacity-10 hover:bg-opacity-20 rounded-full transition-all duration-200"
+                            className="flex items-center space-x-2 px-6 py-3 bg-white/10 bg-opacity-10 hover:bg-white/20 rounded-full transition-all duration-200"
                           >
                             <button.icon className="w-5 h-5 text-white" />
                             <span className="text-white">{button.label}</span>
