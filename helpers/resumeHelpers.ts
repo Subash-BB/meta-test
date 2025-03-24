@@ -1,4 +1,4 @@
-import html2canvas from "html2canvas";
+import html2canvas from "html2canvas-pro";
 import { Linkedin, Instagram } from "lucide-react";
 
 export const resumeHelper = {
@@ -222,37 +222,37 @@ export const resumeHelper = {
   },
   generateNewSlides: (slide: any, name: string, role: string, targetDiv: any) => {
     const innerHtml = document.createElement('div');
-    innerHtml.className = "slide fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50";
+    innerHtml.className = "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50";
 
     const content = `
-          <div class="w-full max-w-2xl mx-4 relative overflow-hidden rounded-xl">
-            <div class="${slide.background}">
-              <div class="min-h-[500px] p-8 relative z-10">
-                <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/50 to-transparent pointer-events-none z-[-1]"></div>
+          <div class="slide" style="width: 100%; max-width: 42rem; margin-left: 1rem; margin-right: 1rem; position: relative; overflow: hidden; border-radius: 0.75rem;">
+            <div class="${slide.background}" style="min-height: 500px;">
+              <div style="min-height: 500px; padding: 2rem; position: relative; z-index: 10;">
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.5), transparent); pointer-events: none; z-index: -1;"></div>
 
                 ${slide.type === 'profile' ? `
-                  <div class="text-center">
-                    <div class="h-48 -mx-8 -mt-8 mb-8">
-                      <img src="${slide.content.image}" alt="" class="w-full h-full object-cover">
+                  <div style="text-align: center;">
+                    <div style="height: 12rem; margin: -2rem -2rem 2rem -2rem;">
+                      <img src="${slide.content.image}" alt="" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
-                    <div class="-mt-24 mb-8 flex justify-center items-center">
+                    <div style="margin-top: -6rem; margin-bottom: 2rem; display: flex; justify-content: center; align-items: center;">
                       <img 
                         src="${slide.content.profile_image}"
                         alt="${slide.content.name}"
-                        class="w-32 h-32 rounded-full border-4 border-white dark:border-gray-800 object-cover"
+                        style="width: 8rem; height: 8rem; border-radius: 9999px; border: 4px solid white; object-fit: cover;"
                       >
                     </div>
-                    <h2 class="text-4xl font-bold mb-2 text-white tracking-tight uppercase">${slide.content.name}</h2>
-                    <p class="text-2xl text-gray-200">${slide.content.role}</p>
+                    <h2 style="font-size: 2.25rem; font-weight: bold; margin-bottom: 0.5rem; color: white; letter-spacing: -0.025em; text-transform: uppercase;">${slide.content.name}</h2>
+                    <p style="font-size: 1.5rem; color: rgb(229, 231, 235);">${slide.content.role}</p>
                   </div>
                 ` : ''}
 
                 ${slide.type === 'summary' ? `
-                  <div class="relative z-10">
-                    <h3 class="text-3xl font-bold text-red-400 mb-6">${slide.content.title}</h3>
-                    <ul class="mb-8 space-y-3">
+                  <div style="position: relative; z-index: 10;">
+                    <h3 style="font-size: 1.875rem; font-weight: bold; color: #ff6b6b; margin-bottom: 1.5rem;">${slide.content.title}</h3>
+                    <ul style="margin-bottom: 2rem;">
                       ${slide.content.points.map((point: string, index: number) => `
-                        <li key="${index}" class="text-gray-200 text-lg">${point}</li>
+                        <li key="${index}" style="color: rgb(229, 231, 235); font-size: 1.125rem; margin-top: 0.75rem;">${point}</li>
                       `).join('')}
                     </ul>
                   </div>
@@ -260,10 +260,10 @@ export const resumeHelper = {
 
                 ${slide.type === 'skills' ? `
                   <div>
-                    <h4 class="text-2xl font-semibold text-red-400 mb-4">SKILLS:</h4>
-                    <div class="grid grid-cols-2 gap-4">
+                    <h4 style="font-size: 1.5rem; font-weight: 600; color: #ff6b6b; margin-bottom: 1rem;">SKILLS:</h4>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
                       ${slide.content.skills.map((skill: string, index: number) => `
-                        <div key="${index}" class="text-gray-200 text-lg bg-black bg-opacity-30 rounded-lg px-4 py-2 flex items-center justify-start"><p>${skill}</p></div>
+                        <div key="${index}" style="color: rgb(229, 231, 235); font-size: 1.125rem; background: rgba(0,0,0,0.3); border-radius: 0.5rem; padding: 0.5rem 1rem; display: flex; align-items: center; justify-content: flex-start;"><p>${skill}</p></div>
                       `).join('')}
                     </div>
                   </div>
@@ -272,20 +272,20 @@ export const resumeHelper = {
                 ${slide.type === 'experience' ? `
                   <div>
                     ${slide.content.points.length > 0 ? `
-                      <h3 class="text-3xl font-bold text-red-400 mb-6">${slide.content.title}</h3>
-                      <ul class="space-y-4">
+                      <h3 style="font-size: 1.875rem; font-weight: bold; color: #ff6b6b; margin-bottom: 1.5rem;">${slide.content.title}</h3>
+                      <ul style="margin-bottom: 1rem;">
                         ${slide.content.points.map((point: string, index: number) => `
-                          <li key="${index}" class="text-gray-200 text-lg bg-black bg-opacity-30 rounded-lg px-4 py-3">${point}</li>
+                          <li key="${index}" style="color: rgb(229, 231, 235); font-size: 1.125rem; background: rgba(0,0,0,0.3); border-radius: 0.5rem; padding: 0.75rem 1rem; margin-bottom: 1rem;">${point}</li>
                         `).join('')}
                       </ul>
                     ` : ''}
                     
                     ${slide.content.projects.length > 0 ? `
-                      <div class="mt-4">
-                        <h4 class="text-2xl font-semibold text-red-400 mb-4">PROJECTS:</h4>
-                        <ul class="space-y-4">
+                      <div style="margin-top: 1rem;">
+                        <h4 style="font-size: 1.5rem; font-weight: 600; color: #ff6b6b; margin-bottom: 1rem;">PROJECTS:</h4>
+                        <ul>
                           ${slide.content.projects.map((project: string, index: number) => `
-                            <li key="${index}" class="text-gray-200 text-lg bg-black bg-opacity-30 rounded-lg px-4 py-3">${project}</li>
+                            <li key="${index}" style="color: rgb(229, 231, 235); font-size: 1.125rem; background: rgba(0,0,0,0.3); border-radius: 0.5rem; padding: 0.75rem 1rem; margin-bottom: 1rem;">${project}</li>
                           `).join('')}
                         </ul>
                       </div>
@@ -295,21 +295,21 @@ export const resumeHelper = {
 
                 ${slide.type === 'projects' ? `
                   <div>
-                    <h4 class="text-2xl font-semibold text-red-400 mb-4">PROJECTS:</h4>
-                    <ul class="space-y-4">
+                    <h4 style="font-size: 1.5rem; font-weight: 600; color: #ff6b6b; margin-bottom: 1rem;">PROJECTS:</h4>
+                    <ul>
                       ${slide.content.projects.map((project: string, index: number) => `
-                        <li key="${index}" class="text-gray-200 text-lg bg-black bg-opacity-30 rounded-lg px-4 py-3">${project}</li>
+                        <li key="${index}" style="color: rgb(229, 231, 235); font-size: 1.125rem; background: rgba(0,0,0,0.3); border-radius: 0.5rem; padding: 0.75rem 1rem; margin-bottom: 1rem;">${project}</li>
                       `).join('')}
                     </ul>
                   </div>
                 ` : ''}
 
                 ${slide.type === 'education' ? `
-                  <div class="relative z-10">
-                    <h3 class="text-3xl font-bold text-red-400 mb-6">${slide.content.title}</h3>
-                    <ul class="space-y-4">
+                  <div style="position: relative; z-index: 10;">
+                    <h3 style="font-size: 1.875rem; font-weight: bold; color: #ff6b6b; margin-bottom: 1.5rem;">${slide.content.title}</h3>
+                    <ul>
                       ${slide.content.points.map((point: string, index: number) => `
-                        <li key="${index}" class="text-gray-200 text-lg bg-black bg-opacity-30 rounded-lg px-4 py-3">${point}</li>
+                        <li key="${index}" style="color: rgb(229, 231, 235); font-size: 1.125rem; background: rgba(0,0,0,0.3); border-radius: 0.5rem; padding: 0.75rem 1rem; margin-bottom: 1rem;">${point}</li>
                       `).join('')}
                     </ul>
                   </div>
@@ -317,59 +317,59 @@ export const resumeHelper = {
 
                 ${slide.type === 'achievements' ? `
                   <div>
-                    <h3 class="text-3xl font-bold text-red-400 mb-6">${slide.content.title}</h3>
-                    <p class="text-gray-200 text-lg leading-relaxed bg-black bg-opacity-30 rounded-lg px-4 py-3">${slide.content.description}</p>
+                    <h3 style="font-size: 1.875rem; font-weight: bold; color: #ff6b6b; margin-bottom: 1.5rem;">${slide.content.title}</h3>
+                    <p style="color: rgb(229, 231, 235); font-size: 1.125rem; line-height: 1.75; background: rgba(0,0,0,0.3); border-radius: 0.5rem; padding: 0.75rem 1rem;">${slide.content.description}</p>
                   </div>
                 ` : ''}
 
                 ${slide.type === 'certifications' ? `
                   <div>
-                    <h3 class="text-3xl font-bold text-red-400 mb-6">${slide.content.title}</h3>
-                    <ul class="space-y-4">
+                    <h3 style="font-size: 1.875rem; font-weight: bold; color: #ff6b6b; margin-bottom: 1.5rem;">${slide.content.title}</h3>
+                    <ul>
                       ${slide.content.points.map((point: string, index: number) => `
-                        <li key="${index}" class="text-gray-200 text-lg bg-black bg-opacity-30 rounded-lg px-4 py-3">${point}</li>
+                        <li key="${index}" style="color: rgb(229, 231, 235); font-size: 1.125rem; background: rgba(0,0,0,0.3); border-radius: 0.5rem; padding: 0.75rem 1rem; margin-bottom: 1rem;">${point}</li>
                       `).join('')}
                     </ul>
                   </div>
                 ` : ''}
 
                 ${slide.type === 'cta' ? `
-                  <div class="text-center space-y-8">
-                    <h3 class="text-3xl font-bold text-white">${slide.content.title}</h3>
-                    <div class="text-7xl">😊</div>
-                    <p class="text-2xl text-gray-200 mb-8">${slide.content.subtitle}</p>
+                  <div style="text-align: center;">
+                    <h3 style="font-size: 1.875rem; font-weight: bold; color: white; margin-bottom: 2rem;">${slide.content.title}</h3>
+                    <div style="font-size: 4.5rem; margin: 2rem 0;">😊</div>
+                    <p style="font-size: 1.5rem; color: rgb(229, 231, 235); margin-bottom: 2rem;">${slide.content.subtitle}</p>
 
-                    <div class="flex flex-col items-center space-y-4">
-                      <p class="text-xl text-gray-200 mb-4">Share your profile</p>
-                      <div class="flex space-x-4">
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                      <p style="font-size: 1.25rem; color: rgb(229, 231, 235); margin-bottom: 1rem;">Share your profile</p>
+                      <div style="display: flex; gap: 1rem;">
                         ${slide.content.shareButtons?.map((button: any, index: number) => `
                           <button
                             key="${index}"
                             onclick="${button.onClick}"
-                            class="flex items-center space-x-2 px-6 py-3 bg-white bg-opacity-10 hover:bg-opacity-20 rounded-full transition-all duration-200"
+                            style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: rgba(255,255,255,0.1); border-radius: 9999px; transition: all 0.2s;"
                           >
-                            <svg class="w-5 h-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${button.icon}</svg>
-                            <span class="text-white">${button.label}</span>
+                            <svg style="width: 1.25rem; height: 1.25rem; color: white;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${button.icon}</svg>
+                            <span style="color: white;">${button.label}</span>
                           </button>
                         `).join('')}
                       </div>
                     </div>
 
-                    <p class="text-red-400 text-xl font-semibold bg-black bg-opacity-30 inline-block px-6 py-3 rounded-full mt-8">
+                    <p style="color: #ff6b6b; font-size: 1.25rem; font-weight: 600; background: rgba(0,0,0,0.3); display: inline-block; padding: 0.75rem 1.5rem; border-radius: 9999px; margin-top: 2rem;">
                       ${slide.content.cta}
                     </p>
                   </div>
                 ` : ''}
               </div>
 
-              <div class="bg-black bg-opacity-50 backdrop-blur-sm text-white py-4 px-6 flex justify-between items-center">
+              <div style="background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); color: white; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center;">
                 ${slide.type !== 'profile' ? `
                   <div>
-                    <span class="text-red-400 font-bold">${name}</span>
-                    <span class="ml-2 text-gray-200">${role}</span>
+                    <span style="color: #ff6b6b; font-weight: bold;">${name}</span>
+                    <span style="margin-left: 0.5rem; color: rgb(229, 231, 235);">${role}</span>
                   </div>
                 ` : '<div></div>'}
-                <div class="text-sm text-gray-300">ElevateResume.ai</div>
+                <div style="font-size: 0.875rem; color: rgb(209, 213, 219);">ElevateResume.ai</div>
               </div>
             </div>
           </div>

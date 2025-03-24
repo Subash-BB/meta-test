@@ -27,9 +27,9 @@ export default function ResumePage({ resume }: { resume: any }) {
     alert('Link copied to clipboard');
   }
   return <div>
-    <div className='flex flex-col items-center justify-center mt-10'>
+    <div className='flex flex-col items-center justify-center mt-10 px-4'>
       {slides.length > 0 && (
-        <div className="w-[500px]">
+        <div className="w-full max-w-[500px] mx-auto px-4 sm:px-0">
           <CandidateCard
             name={resume?.name}
             title={resume?.title}
@@ -39,9 +39,8 @@ export default function ResumePage({ resume }: { resume: any }) {
             creation={resume?.creation}
             onClick={handleCardClick}
           />
-          <div className='flex flex-row gap-4 items-center justify-center mt-10'>
-            {/* <button className='bg-blue-500 text-white px-4 py-2 rounded-md' onClick={() => handleDownloadSlides(slides)}>Download</button> */}
-            <button className='bg-blue-500 text-white px-4 py-2 rounded-md' onClick={handleCopyToClipboard}>Copy Link</button>
+          <div className='flex flex-col sm:flex-row gap-4 items-center justify-center mt-10'>
+            <button className='w-full sm:w-auto bg-blue-500 text-white px-4 py-2 rounded-md' onClick={handleCopyToClipboard}>Copy Link</button>
           </div>
         </div>
       )}
