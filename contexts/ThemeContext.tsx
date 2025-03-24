@@ -22,11 +22,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (isDarkMode) {
       document.documentElement.classList.add('dark');
-      console.log('document.documentElement.classList', document.documentElement.classList)
       localStorage.setItem('theme', 'dark');
     } else {
       document.documentElement.classList.remove('dark');
-      console.log('document.documentElement.classList', document.documentElement.classList)
       localStorage.setItem('theme', 'light');
     }
   }, [isDarkMode]);
