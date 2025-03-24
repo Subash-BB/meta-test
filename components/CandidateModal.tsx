@@ -1,5 +1,6 @@
 import React from 'react';
 import { ChevronLeft, ChevronRight, X, Linkedin, Instagram } from 'lucide-react';
+import { resumeHelper } from '@/helpers/resumeHelpers';
 
 interface CandidateModalProps {
   slides?: any[];
@@ -261,16 +262,29 @@ export default function CandidateModal({ slides, slideLoading, isOpen, onClose, 
                   <div className="flex flex-col items-center space-y-4">
                     <p className="text-xl text-gray-200 mb-4">Share your profile</p>
                     <div className="flex space-x-4">
-                      {slide.content.shareButtons?.map((button: any, index: number) => (
-                        <button
-                          key={index}
-                          onClick={button.onClick}
-                          className="flex items-center space-x-2 px-6 py-3 bg-white/10 bg-opacity-10 hover:bg-white/20 rounded-full transition-all duration-200"
-                        >
-                          <button.icon className="w-5 h-5 text-white" />
-                          <span className="text-white">{button.label}</span>
-                        </button>
-                      ))}
+                      {slide.content.shareButtons?.map((button: any, index: number) => {
+                        if (button.label === 'Share on Instagram') {
+                          return <button
+                            key={index}
+                            onClick={() => {
+                              resumeHelper.downloadSlides(slides || []);
+                            }}
+                            className="flex items-center space-x-2 px-6 py-3 bg-white bg-opacity-10 hover:bg-opacity-20 rounded-full transition-all duration-200"
+                          >
+                            <button.icon className="w-5 h-5 text-white" />
+                            <span className="text-white">{button.label}</span>
+                          </button>
+                        } else {
+                          return <button
+                            key={index}
+                            onClick={button.onClick}
+                            className="flex items-center space-x-2 px-6 py-3 bg-white bg-opacity-10 hover:bg-opacity-20 rounded-full transition-all duration-200"
+                          >
+                            <button.icon className="w-5 h-5 text-white" />
+                            <span className="text-white">{button.label}</span>
+                          </button>
+                        }
+                      })}
                     </div>
                   </div>
 

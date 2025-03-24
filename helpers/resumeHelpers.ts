@@ -1,3 +1,4 @@
+import html2canvas from "html2canvas";
 import { Linkedin, Instagram } from "lucide-react";
 
 export const resumeHelper = {
@@ -197,7 +198,7 @@ export const resumeHelper = {
             icon: Linkedin,
             label: 'Share on LinkedIn',
             onClick: () => {
-              const url = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(window.location.href);
+              const url = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(`https://elevateresume.vercel.app/resume/${resume.id}`);
               window.open(url, '_blank', 'width=600,height=600');
             }
           },
@@ -376,5 +377,70 @@ export const resumeHelper = {
     innerHtml.innerHTML = content;
     targetDiv.appendChild(innerHtml);
     return targetDiv;
+  },
+  downloadSlides: async (slides: any[]) => {
+    const slidesContainer = document.createElement('div');
+    slidesContainer.style.position = 'absolute';
+    slidesContainer.style.opacity = '0';
+    slidesContainer.style.left = '-9999px';  // Move off-screen
+    document.body.appendChild(slidesContainer);  // Add to DOM
+
+    slides.forEach((slide, index) => {
+      if (index !== slides.length - 1) {
+        resumeHelper.generateNewSlides(slide, slides[0].content.name, slides[0].content.role, slidesContainer);
+      }
+    });
+
+    // Wait for a brief moment to ensure DOM elements are rendered
+    await new Promise(resolve => setTimeout(resolve, 100));
+
+    const slideDivs = slidesContainer.querySelectorAll('.slide');
+    // const pdf = new jsPDF();
+    for (let i = 0; i < slideDivs.length; i++) {
+      const slideDiv = slideDivs[i];
+      const slideNumber = i + 1;
+
+      try {
+        const canvas = await html2canvas(slideDiv as HTMLElement, {
+          logging: false,
+          useCORS: true,
+          allowTaint: true
+        });
+
+        const dataURL = canvas.toDataURL('image/png');
+        // if (i > 0) {
+        //   pdf.addPage(); // Add a new page for subsequent slides
+        // }
+
+        // Get page dimensions
+        // const pageWidth = pdf.internal.pageSize.getWidth();
+        // const pageHeight = pdf.internal.pageSize.getHeight();
+
+        // Set white background for the page
+        // pdf.setFillColor(255, 255, 255);
+        // pdf.rect(0, 0, pageWidth, pageHeight, 'F');
+
+        // Calculate image dimensions to fit the page while maintaining aspect ratio
+        // const imgWidth = pageWidth - 20; // Add margin
+        // const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+        // Calculate x and y coordinates to center the image
+        // const x = (pageWidth - imgWidth) / 2;
+        // const y = (pageHeight - imgHeight) / 2;
+
+        // Add the centered image to the PDF
+        // pdf.addImage(dataURL, 'PNG', x, y, imgWidth, imgHeight);
+
+        const a = document.createElement('a');
+        a.href = dataURL;
+        a.download = `slide-${slideNumber}.png`;
+        a.click();
+      } catch (error) {
+        console.error(`Error converting slide ${slideNumber} to image:`, error);
+      }
+    }
+    // pdf.save(`${slides[0].content.name}-${slides[0].content.role}-resume.pdf`);
+    // Clean up
+    document.body.removeChild(slidesContainer);
   }
 }
