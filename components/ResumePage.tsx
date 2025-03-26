@@ -4,6 +4,7 @@ import { resumeHelper } from '@/helpers/resumeHelpers'
 import { useState } from 'react';
 import CandidateCard from './CandidateCard';
 import CandidateModal from './CandidateModal';
+import { ClipboardCopy } from 'lucide-react';
 
 export default function ResumePage({ resume }: { resume: any }) {
   const slides = resumeHelper.resumeToSlides(resume)
@@ -40,7 +41,10 @@ export default function ResumePage({ resume }: { resume: any }) {
             onClick={handleCardClick}
           />
           <div className='flex flex-col sm:flex-row gap-4 items-center justify-center mt-10'>
-            <button className='w-full sm:w-auto bg-blue-500 text-white px-4 py-2 rounded-md' onClick={handleCopyToClipboard}>Copy Link</button>
+            <button className='copy-btn flex gap-2 w-full sm:w-auto bg-blue-500 text-white px-4 py-2 rounded-md' onClick={handleCopyToClipboard}>
+            <ClipboardCopy/>
+            </button>
+
           </div>
         </div>
       )}

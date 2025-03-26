@@ -2,13 +2,20 @@
 
 import React from 'react';
 import { Sun, Moon } from 'lucide-react';
-import { useTheme } from '../contexts/ThemeContext';
+import { useTheme } from 'next-themes';
 import Link from 'next/link';
 
 export default function Navbar() {
-  const { isDarkMode, toggleDarkMode } = useTheme();
+  const { theme, setTheme } = useTheme()
   if (typeof window === 'undefined') {
     return null;
+  }
+  const toggleDarkMode = ()=>{
+    if(theme == 'dark'){
+      setTheme('light')
+    }else{
+      setTheme('dark')
+    }
   }
   return (
     <nav className="border-b bg-white dark:bg-gray-800 dark:border-gray-700">
@@ -25,7 +32,7 @@ export default function Navbar() {
               className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300"
               aria-label="Toggle dark mode"
             >
-              {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              {theme =='dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             </button>
           </div>
         </div>
