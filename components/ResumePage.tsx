@@ -42,7 +42,7 @@ export default function ResumePage({ resume }: { resume: any }) {
           />
           <div className='flex flex-col sm:flex-row gap-4 items-center justify-center mt-10'>
             <button className='copy-btn flex gap-2 w-full sm:w-auto bg-blue-500 text-white px-4 py-2 rounded-md' onClick={handleCopyToClipboard}>
-            <ClipboardCopy/>
+              <ClipboardCopy />
             </button>
 
           </div>
